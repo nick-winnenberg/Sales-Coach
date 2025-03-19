@@ -50,8 +50,8 @@ if len(dfs)>0:
     df['Day Completed'] = df['Completed Date'].dt.day_name()
     df['Year Billed'] = df ['Date First Bill'].dt.year
     df['Never Billed'] = df['Date First Bill'].isna()
-    df["Apt Set"] = df["Results"].str.contains("Appointment Set", case="False")
-    df["MPC"] = df["Results"].str.contains("MPC", case="False")
+    df["Apt Set"] = df["Results"].str.contains("Appointment Set", case="False",na=False)
+    df["MPC"] = df["Results"].str.contains("MPC", case="False",na=False)
 
     clients = df.groupby("Company Name").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
     single_clients = clients[clients["Count"] == 1]
@@ -70,7 +70,7 @@ if len(dfs)>0:
 
     mpc = df.groupby("MPC").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
 
-    mutlti_apt_aduit = apt_set_audit.groupby("Company Name").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
+    mutlti_apt_aduit = df.groupby("Company Name").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=True)
 
 
     ## Global Variables
