@@ -70,7 +70,7 @@ if len(dfs)>0:
 
     mpc = df.groupby("MPC").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
 
-    mutlti_apt_aduit = df.groupby("Company Name").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=True)
+    mutlti_apt_aduit = apt_set_audit.groupby("Company Name").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
 
 
     ## Global Variables
