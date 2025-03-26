@@ -84,7 +84,7 @@ if len(dfs)>0:
 
 
     ## Visualization
-    st.subheader("Top Contacted Clients")
+    st.subheader("Clients with Multiple Touches")
     col1, col2, col3= st.columns(3)
     col1.metric("All Calls", all_calls, delta=None, delta_color="normal", help=None, label_visibility="visible", border=False)
     col2.metric("Clients Contacted", client_count, delta=None, delta_color="normal", help=None, label_visibility="visible", border=False)
@@ -108,7 +108,7 @@ if len(dfs)>0:
     col3.metric("MPC", mpc_calls, delta=None, delta_color="normal", help=None, label_visibility="visible", border=False)
     st.write("Appointment Set Audit")
     st.dataframe(apt_set_audit)
-    st.write("Clients with Multiple Appointments")
+    st.write("Clients with Multiple Appointments Set")
     st.dataframe(mutlti_apt_aduit)
 
 
