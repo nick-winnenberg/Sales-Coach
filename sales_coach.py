@@ -6,7 +6,7 @@ import streamlit as st
 from pathlib import Path
 import altair as alt
 
-st.header("🧙Sales Rep Review 👔")
+st.header("Sales Rep Review")
 st.write("Maintained by Nick Winnenberg - hit me on Teams or via email with questions.")
 
 files_dict = {}
@@ -121,7 +121,9 @@ if len(dfs)>0:
         st.write("🧙‍♂️ Advanced mode activated... Welcome to the big leagues!🙌")
 
         ## Advanced Analytics DF Creation
-        user = df.groupby("Completed By").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
+        df["DM Count"]=np.where(df["DM Reached"]=="Yes",1,0)
+        df["Apt Count"]=np.where(df["Call Type"]=="Appointment call - face to face",1,0)
+        user = df.groupby("Completed By").agg(Count=("Results",'size'),Apts=("Apt Count","sum"),DMs=("DM Count","sum")).sort_values(by=['Count'], ascending=False)
         user["Percent of calls"]=round(user["Count"]/sum(user["Count"]),2)
         user = user.reset_index()
 
