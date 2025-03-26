@@ -6,7 +6,8 @@ import streamlit as st
 from pathlib import Path
 import altair as alt
 
-st.header("Sales Rep Review")
+st.header("🧙Sales Rep Review 👔")
+st.write("Maintained by Nick Winnenberg - hit me on Teams or via email with questions.")
 
 files_dict = {}
 
@@ -117,7 +118,7 @@ if len(dfs)>0:
     if len(df.columns)<=19:
         st.write("If you want to see additional analysis, for example DM calls, etc. Please add ALL the columns to the Client Prospect Activity Detail Dashboard, Using My Menu in Q4.")
     else:
-        st.write("Advanced mode activated... Welcome to the big leagues!")
+        st.write("🧙‍♂️ Advanced mode activated... Welcome to the big leagues!🙌")
 
         ## Advanced Analytics DF Creation
         user = df.groupby("Completed By").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
