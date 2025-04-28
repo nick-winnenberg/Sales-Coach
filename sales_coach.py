@@ -131,6 +131,7 @@ if len(dfs)>0:
         call_type = df.groupby("Call Type").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
 
         apts = df[df["Call Type"]== "Appointment call - face to face"]
+        apts = apts.drop(columns=["Completed Date","Date First Bill","Territory","Last Contacted","Phone","Date Last Bill","Call Type","Grade","Day Completed","Year Billed","Never Billed","Apt Set","MPC","DM Count","Apt Count"])
 
         apts_audit = apts.groupby("Company Name").agg(Count=("Results",'size')).sort_values(by=['Count'], ascending=False)
 
@@ -149,7 +150,8 @@ if len(dfs)>0:
         col2.metric("Appointment Calls", apt_count, delta=None, delta_color="normal", help=None, label_visibility="visible", border=False)
         col3.metric("Clients with Appointments", len(apts_audit), delta=None, delta_color="normal", help=None, label_visibility="visible", border=False)
         st.write("Appointments per Client")
-        st.dataframe(apts_audit)
+        st.dataframe(apts_audit,on_select=callable)
+        st.dataframe(apts)
 
         ### DMS
         st.write("Decision Maker Connects")
@@ -170,9 +172,8 @@ if len(dfs)>0:
                 alt.Y('Completed By',sort="-x")
                 )
             )
-
+        
         st.altair_chart(c)
-
 
 
       
